@@ -102,10 +102,12 @@ spec:
 
 После приготовления оба манифеста встраиваются в кластер при помощи команд:
 >kubectl apply -f helloworld_rc.yaml
+
 >kubectl apply -f helloworld_dep.yaml
 
 после чего идет запуск сервисов командами:
 >minikube service hellowrold
+
 >minikube servoce helloworld-v2
 
 ## Результаты работы
