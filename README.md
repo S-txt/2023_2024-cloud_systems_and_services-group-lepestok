@@ -17,13 +17,13 @@
 
 [Лабораторная работа 1](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-1-dev/Lab%201)
   
-  ❌ обычная
+  ✔️ обычная
 
-  ❌ со звездочкой
+  ✔️ со звездочкой
   
-[Лабораторная работа 2](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202)
+[Лабораторная работа 2](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-1-dev/Lab%202)
   
-  ❌ обычная
+  ✔️ обычная
 
   ❌ со звездочкой
   
