@@ -113,14 +113,14 @@ spec:
 ## Результаты работы
 
 После запуска сервисов в терминале можно получить такой вывод для Replication Controller:
-<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-1-dev/Lab%202/img/hw_rc_service.JPG"/></p>
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202/img/hw_rc_service.JPG"/></p>
 
-<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-1-dev/Lab%202/img/hw_rc_page.JPG"/></p>
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202/img/hw_rc_page.JPG"/></p>
 
 И следующий вывод для Deployment:
 
-<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-1-dev/Lab%202/img/hw_dep.JPG"/></p>
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202/img/hw_dep.JPG"/></p>
 
-<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-1-dev/Lab%202/img/hw_dep_page.JPG"/></p>
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202/img/hw_dep_page.JPG"/></p>
 
 Мы большие молодцы, у нас всё работает😎
