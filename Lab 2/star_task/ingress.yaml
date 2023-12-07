@@ -1,24 +1,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
-   name: hw
+  name: hw
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
 spec:
-   tls:
+  ingressClassName: nginx
+  tls:
     - hosts:
-         - minikube.wbs.ru
+        - wbs.ru
       secretName: hw-tls
-   rules:
-    - host: minikube.wbs.ru
+  rules:
+    - host: wbs.ru
       http:
-         paths:
+        paths:
           - path: /
             pathType: Prefix
             backend:
-               service:
-                  name: hw
-                  port:
-                     number: 80
-
+              service:
+                name: hw
+                port:
+                  number: 3000
 
 
