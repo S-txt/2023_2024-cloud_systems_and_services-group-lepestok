@@ -119,7 +119,7 @@ spec:
 
 И следующий вывод для Deployment:
 
-<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-2-dev/Lab%202/img/hw_dep.JPG"/></p>
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-2-dev/Lab%202/img/hw_dep_page.JPG"/></p>
 
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-2-dev/Lab%202/img/hw_dep.JPG"/></p>
 
