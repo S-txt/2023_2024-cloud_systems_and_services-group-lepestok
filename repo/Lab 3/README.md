@@ -1,37 +1,75 @@
 # Лабораторная работа 3
 ## Обычная
-Создадим репозиторий в GitLab.
+Создадим репозиторий в GitLab:
 
-![alt text](/Lab%203/images/repo.png)({width: 100px})
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/repo.png?raw=true" width=50% height=100%>
 
-<img src="/Lab%203/images/repo.png">
+Репозиторий содержит простой веб-сервер на Express.js, который собирается в Docker, где Dockerfile имеет следующий вид:
+```
+FROM node:20-alpine
+WORKDIR /app
+COPY . /app/
+RUN npm i
+CMD ["npm", "run", "start"]
+```
 
-### "Плохие" практики
-В качестве плохих практик в Dockerfile были использованы следующие четыре практики:
+Для автоматической сборки и деплоя на сервер подключим CI/CD:
 
-— `FROM ubuntu:latest` Использование последней версии образа Ubuntu без указания конкретной версии. Это может привести к несовместимости с зависимостями и непредсказуемому поведению в будущем.
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/ci-cd-runner.png?raw=true" width=50% height=100%>
 
-— `RUN apt-get update && apt-get install -y apache2` Обновление пакетов и установка apache2 в одном слое. Это приводит к увеличению размера образа и усложняет отслеживание изменений.
+Конфигурационный файл CI/CD для GitLab Runner следующий:
+```
+image: docker:latest
 
-— `CMD ["apache2ctl", "-D", "FOREGROUND"]` Использование CMD для запуска apache2 в фоновом режиме. Это может привести к тому, что контейнер будет считаться активным, даже если Apache не работает.
+services:
+  - docker:dind
 
-— `ARG port=80` Объявление переменных сред в описании Dockerfile.
-### "Хорошие" практики
-В "хорошей" версии Dockerfile все плохие практики были исправлены:
 
-— `FROM ubuntu:20.04`  Указали конкретную версию образа Ubuntu для обеспечения стабильности и предсказуемости.
+stages:
+  - build
+  - deploy
 
-— `RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends apache2 \
-    && rm -rf /var/lib/apt/lists/*` Разделили установку пакетов и обновления на два слоя для уменьшения размера образа и облегчения отслеживания изменений.
+build:
+  stage: build
+  script:
+    - echo "build phase..."
+    - docker build -t clouds-app .
+    - docker login -u alekspi27 -p Sancho135720
+    - docker tag clouds-app alekspi27/clouds:clouds-app
+    - docker push alekspi27/clouds:clouds-app
 
-— `ENTRYPOINT ["apache2ctl", "-D", "FOREGROUND"]` Заменили ENTRYPOINT на CMD для запуска apache2, чтобы контейнер мог быть остановлен, если Apache не работает.
+deploy:
+  stage: deploy
+  before_script:
+  #   - eval $(ssh-agent -s)
+  #   - eval $(ssh-agent -s)
+  #   - echo "$CURRENT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  #   - mkdir -p ~/.ssh
+  #   - chmod 700 ~/.ssh
+  #   - chmod 400 Clouds-lab.pem
+    # - ssh-keyscan -p 22 -t rsa $SSH_HOST > ~/.ssh/known_hosts
+    - chmod 400 Clouds-lab.pem
+  script:
+    - echo "deploy phase..."
+    - docker login -u alekspi27 -p Sancho135720
+    - docker pull alekspi27/clouds:clouds-app
+    - ls
+    - docker save alekspi27/clouds:clouds-app | gzip > clouds-app.tar.gz
+    - scp -o StrictHostKeyChecking=no -i Clouds-lab.pem clouds-app.tar.gz ubuntu@ec2-54-210-230-237.compute-1.amazonaws.com:~/project/
+    # - ssh -i -p 22 aleksandrpiliakin@95.25.207.154 chmod +x ./deploy
+```
 
-— Вместо явного указания переменной в Dockerfile вынесли установку переменной на уровень аргументов запуска контейнера.
-### "Плохие" практики использования контейнера
-В качестве примеров "плохого" использования контейнера можно назвать:
+В нашем пайплане всего 2 стадии - `build` и `stages`, каждая из которых имеет по одноимённой джобе:
 
-— Запуск контейнера с привилегиями root без необходимости. Это может привести к уязвимостям безопасности и компрометации хостовой системы.
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/pipeline.png?raw=true" width=50% height=100%>
 
-— Использование устаревших версий пакетов или ядра. Это может привести к уязвимостям безопасности и несовместимости с другими приложениями.
+Будем заливать файлы проекта на сервер и смотреть за исполнением паплайнов:
+
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/pipelines.png?raw=true" width=50% height=100%>
+
+Собранный Docker-образ после сборки сохраняется в приватный репозиторий Docker Registry, из которого читается на этапе деплоя. Во время деплоя архив с образом загружается на сервер, где его можно распаковать и запустить:
+
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/deploy-result.png?raw=true" width=50% height=100%>
+
+
 ## Со звездочкой
