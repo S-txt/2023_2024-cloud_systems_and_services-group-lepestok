@@ -2,7 +2,7 @@
 ## Обычная
 Создадим репозиторий в GitLab (https://gitlab.com/aleksandrpiliakin/clouds):
 
-<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/repo.png?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/repo.png?raw=true" width=50% height=100%>
 
 Репозиторий содержит простой веб-сервер на Express.js, который собирается в Docker, где Dockerfile имеет следующий вид:
 ```
@@ -15,7 +15,7 @@ CMD ["npm", "run", "start"]
 
 Для автоматической сборки и деплоя на сервер подключим CI/CD:
 
-<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/ci-cd-runner.png?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/ci-cd-runner.png?raw=true" width=50% height=100%>
 
 Конфигурационный файл CI/CD для GitLab Runner следующий:
 ```
@@ -61,15 +61,15 @@ deploy:
 
 В нашем пайплане всего 2 стадии - `build` и `stages`, каждая из которых имеет по одноимённой джобе:
 
-<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/pipeline.png?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/pipeline.png?raw=true" width=50% height=100%>
 
 Будем заливать файлы проекта на сервер и смотреть за исполнением паплайнов:
 
-<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/pipelines.png?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/pipelines.png?raw=true" width=50% height=100%>
 
 Собранный Docker-образ после сборки сохраняется в приватный репозиторий Docker Registry, из которого читается на этапе деплоя. Во время деплоя архив с образом загружается на сервер, где его можно распаковать и запустить:
 
-<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/deploy-result.png?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/deploy-result.png?raw=true" width=50% height=100%>
 
 
 ## Со звездочкой
