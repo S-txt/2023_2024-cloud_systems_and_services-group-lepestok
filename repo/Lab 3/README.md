@@ -1,6 +1,6 @@
 # Лабораторная работа 3
 ## Обычная
-Создадим репозиторий в GitLab:
+Создадим репозиторий в GitLab (https://gitlab.com/aleksandrpiliakin/clouds):
 
 <img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/repo/Lab%203/images/repo.png?raw=true" width=50% height=100%>
 
