@@ -30,3 +30,38 @@
 
 — Использование устаревших версий пакетов или ядра. Это может привести к уязвимостям безопасности и несовместимости с другими приложениями.
 ## Со звездочкой
+Для выполнения задачи был сформирован Docker Compose файл в котором были настроены MySQL как база данных и WordPress как источник данных. В параметрах WordPress были указаны данные о бд mysql.
+```
+version: "0.2"
+services:
+ db:
+  image: mysql:5.7
+  volumes:
+   - db_data:/var/lib/mysql
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: rootpassword
+   MYSQL_DATABASE: lab1
+   MYSQL_USER: lab1_user
+   MYSQL_PASSWORD: password
+ wordpress:
+  depends_on:
+   - db
+  image: wordpress:latest
+  ports:
+   - "8000:80"
+  restart: always
+  environment:
+   WORDPRESS_DB_HOST: db:3306
+   WORDPRESS_DB_USER: lab1_user
+   WORDPRESS_DB_PASSWORD: password
+   WORDPRESS_DB_NAME: lab1
+volumes:
+ db_data: {}
+```
+
+После запуска контейнеров мы можем зайти в веб интерфейс wordpress и зарегистрировать пользователя, данные о котором будут записаны в бд.
+<p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-1-dev/Lab%201/img/1.jpg"/></p>
+
+После перезагрузки контейнеров запись в бд будет сохранена, что и требовалось по условию работы.
+
