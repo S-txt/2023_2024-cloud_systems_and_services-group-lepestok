@@ -19,25 +19,25 @@
   
   ✔️ обычная
 
-  ✔️ со звездочкой
+   со звездочкой
   
-[Лабораторная работа 2](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/lab-1-dev/Lab%202)
+[Лабораторная работа 2](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/main/Lab%202)
   
   ✔️ обычная
 
-  ❌ со звездочкой
+  ✔️ со звездочкой
   
-Лабораторная работа 3
+[Лабораторная работа 3](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/main/Lab%203)
   
-  ❌ обычная
+  ✔️ обычная
 
-  ❌ со звездочкой
+  ✔️ со звездочкой
   
-Лабораторная работа 4
+[Лабораторная работа 4](https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/tree/main/Lab%204)
   
-  ❌ обычная
+  ✔️ обычная
 
-  ❌ со звездочкой
+  ✔️ со звездочкой
 
 
 
