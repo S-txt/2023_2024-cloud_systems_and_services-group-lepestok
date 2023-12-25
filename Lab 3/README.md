@@ -79,7 +79,7 @@ deploy:
 
 После установки поднимем сервер с хранилищем с помощью команды `vault server -dev`.
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/vault_server_dev.jpg?raw=true" width=50% height=100%>
 
 Обозначим переменные окружения адреса и токена хранилища следующими командами:
 ```
@@ -88,15 +88,15 @@ export VAULT_TOKEN='hvs.5CZMotNlxaioL2sH3kQgCwi3'
 ```
 Также для доступа GitLab к хранилищу необходимо прокинуть Vault-сервер с помощью утилиты Ngrok:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/ngrok.jpg?raw=true" width=50% height=100%>
 
 После нужно настроить метод аутентификации через JWT для нашего Vault-сервера. Сначала разрешим его командой `vault auth enable jwt`:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/enable_jwt.jpg?raw=true" width=50% height=100%>
 
 Теперь зададим метод аутентификации через JWT командой `vault write auth/jwt/config jwks_url="https://gitlab.com/-/jwks" bound_issuer="gitlab.com"`, где bound_issuer определяет, что только токены, выпущенные от имени домена gitlab.com могут использовать этот метод аутентификации, а страница https://gitlab.com/-/jwks должна использоваться в качестве точки валидации токена JWKS:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/vault_write_auth.jpg?raw=true" width=50% height=100%>
 
 Создадим наши секреты. В качестве них у нас будут выступать логин и пароль от докера. Сделаем это следующими командами (реальные данные скрыты в целях конфиденциальности):
 ```
@@ -110,8 +110,8 @@ vault kv get -field=password secret/clouds/docker*
 ```
 Демонстрация работы команд для секрета с логином:
 
-картинка
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/create_secret.jpg?raw=true" width=50% height=100%>
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/get_secret.jpg?raw=true" width=50% height=100%>
 
 Пропишем политику безопасности, которая даст нам доступ на чтение секретов для докера:
 ```
@@ -123,7 +123,7 @@ EOF
 ```
 Результат работы:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/write_policy.jpg?raw=true" width=50% height=100%>
 
 Теперь нам нужна роль, которая будет связывать созданную политику с JWT-токеном. Прописывается она следующим образом:
 ```
@@ -143,13 +143,13 @@ EOF
 ```
 Результат выполнения:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/write_role.jpg?raw=true" width=50% height=100%>
 
 На этом настройка со стороны HashiCorp Vault завершена. 
 ### Настройка GitLab
 Сначала убедимся, что включена функция, ограничивающая доступ к проекту из других джоб токенов:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/token_access.jpg?raw=true" width=50% height=100%>
 
 Модифицируем наш .gitlab-ci.yml файл. Добавим стадию pre-build, где "достанем" наши секреты из хранилища и сохраним во временный файл build.env для использования в других джобах:
 ```
@@ -235,9 +235,9 @@ deploy:
 
 Все стадии пайплайна отрабатывают успешно:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/pipeline_done.png?raw=true" width=50% height=100%>
 
 В итоге, как и в Лабораторной работе 3, мы можем убедиться, что образ проекта загружен на тестовый сервер:
 
-картинка
+<img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-3-dev/Lab%203/images/server.jpg?raw=true" width=50% height=100%>
 
