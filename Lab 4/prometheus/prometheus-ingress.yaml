@@ -1,0 +1,37 @@
+## Nginx Ingress
+## Follow https://devopscube.com/setup-ingress-kubernetes-nginx-controller/
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ui
+  namespace: lab4star
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  # Use the host you used in your kubernetes Ingress Configurations
+  - host: prometheus.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: prometheus-service
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts: 
+    - prometheus.apps.shaker242.lab
+    secretName: prometheus-secret
+---
+apiVersion: v1 
+kind: Secret 
+metadata:
+  name: prometheus-secret 
+  namespace: lab4star
+data:
+# USe base64 in the certs
+  tls.crt: MIID7zCCAtegAwIBAgIUDl8xm1gj0+0E2xHKmuMpsGMmM2MwDQYJKoZIhvcNAQELBQAwgYYxCzAJBgNVBAYTAlJVMQwwCgYDVQQIDANTUEIxDDAKBgNVBAcMA1NQQjENMAsGA1UECgwESVRNTzENMAsGA1UECwwERklDVDEXMBUGA1UEAwwOU2FsYWtob3YgVGltdXIxJDAiBgkqhkiG9w0BCQEWFXNhYnplcm92MzAzQGdtYWlsLmNvbTAeFw0yMzEyMjQyMjI0MDJaFw0yNDEyMjMyMjI0MDJaMIGGMQswCQYDVQQGEwJSVTEMMAoGA1UECAwDU1BCMQwwCgYDVQQHDANTUEIxDTALBgNVBAoMBElUTU8xDTALBgNVBAsMBEZJQ1QxFzAVBgNVBAMMDlNhbGFraG92IFRpbXVyMSQwIgYJKoZIhvcNAQkBFhVzYWJ6ZXJvdjMwM0BnbWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCm5yLAulC2SG6Jodgz0xvyNkr4G0GexGOr2m9dW9BYY4nYYwOGM9GKe+hfvGgCNtkcEHQLUFRgXTstYKnvvqkwvbF2HrQaGnSQirMKaCCyFF69UJJyiW7Ju1IhcAwtaxRtoWPMBNIBF/HzBcJrLnkZAog2Q1JRAuL8TdsgB+l7X5vD8qrQgHZmQ0nzP3An/3CGH3znJGojVCkqgI/MXCTCINhelyf5q3CJnK67tJ58tr/xQj2mMqnaTg1EeyU0zdM+1lEwi05MtK2fcEC0xwHpAuaGJWyI3IFfqAGAGWlpI3nZvvaYFr76MbNPiwigKJUQE8T2bHKhrip8t1pMLHgZAgMBAAGjUzBRMB0GA1UdDgQWBBQ7CXfzfQZDKTP1K3Xq61604kgyTTAfBgNVHSMEGDAWgBQ7CXfzfQZDKTP1K3Xq61604kgyTTAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQAcRZpTVu8MCYZNR0fFqo/s7rfFQiQR2AZZmzIIy2lO1DzQg9OQWcuQiiGB2ABExEEj3dbSI3tqSr/Bt3c6pW8YBtyZH/PSJ42Pzn+O0W/7WqhoWvT2Aw1g2+5DHOz7Jf6Je+MUg2m3bU/kPwcklqb8nAJ7nc2HhFdGe73T6FEKpyG1OFHtKH5JqupGH9KpDXQevsr+n0gsHMOZBle2n+INFliw8dboZ+7JKVVg+XTVC9x/TTRNX/D3yFa1etXiSmdM3U/bAIlffzAXvtGqCT8kR1r5lkXM7YYxbBw9lc2X9CpnfWQJihaeMOXcnBDgbCJjKEmoPvhM5SpqpZzX5veQ
+  tls.key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCm5yLAulC2SG6Jodgz0xvyNkr4G0GexGOr2m9dW9BYY4nYYwOGM9GKe+hfvGgCNtkcEHQLUFRgXTstYKnvvqkwvbF2HrQaGnSQirMKaCCyFF69UJJyiW7Ju1IhcAwtaxRtoWPMBNIBF/HzBcJrLnkZAog2Q1JRAuL8TdsgB+l7X5vD8qrQgHZmQ0nzP3An/3CGH3znJGojVCkqgI/MXCTCINhelyf5q3CJnK67tJ58tr/xQj2mMqnaTg1EeyU0zdM+1lEwi05MtK2fcEC0xwHpAuaGJWyI3IFfqAGAGWlpI3nZvvaYFr76MbNPiwigKJUQE8T2bHKhrip8t1pMLHgZAgMBAAECggEAC+xzVSV6YqtmCjsfwQQR+Qnb7UG1PGx3Wm2uixLmHYpu7KCWPd4x2BzmCwDgxVe5xwF96NkCTiga9DD1swUB/VNv/CpRX5QIQ9NE2zd5Ln+6DPhWngwneA4D3hOtKwl9Wh+vi4HEpwNY6627qACX8it2I7pHhTYZlUDSqMUn7wJWCqGj/2unvVjv248QGSCgwwoy6ZkbJa0iDxMPJnthZfW9gSz62sDMUqk23gTEuh/YHy0jC7E+HV+FP0XBi17uXrB2/gVqhDEE4AHfGwLfEOOkgL2njoIuwpv4Oe+pivzSp5e/Jw38kPbxoG42XaNwdZJwLdg2BMb6TQinY8fVCQKBgQDR/RvxGAts4nb/IPmhQghdIY76SRKIpCb8gaBfwnd2I5xTV8aNWTQZ4m8MkLKHhPuMLyh5dnaHAyLcB+G9T/i46rB+75F9Fqde81AQ9Fsx2XOhgXtkb9KLpmCob+qkPRtiSnaLLHuaSFpmiXlcNkjkFhM6Lvr+O4M7COuzZUmknwKBgQDLeTbQaImkToFRdwUyup7xEtLkLFbz011OHGcekSLpYP92wqkED0MCCrdyT/10vtXfD8iA40eu//pi1ywdlIo1eDByNqyVTlqsHWBtKS850fQ8y65/uSYapHYbLGcB1BcX3XMi+8hv4P/ylw4hbno0Xa9OElR7q/22ek363N4wRwKBgQCYFJ/v9GIR8dIM5GzmhVRZXryWN+XcYEZ8CcWElOq//Ppywddi93/sXznd983UqFMmK+E8VrdxAKx2fp7W5NxV0GMTC55q4cVF1yHdpZuGdt5v0b7z9qidy1mlo6hkWn1CqntAQG8kRdJzAI2MYyRXTEWQlgXhqmhYkRVjT7AOMQKBgFrbNW66PzvvEi+eRePxESf0j9bzNaCKsQ8//4vWoxAzD9+n7HCzn+g5gNC6hyKqVDXWhmGHG2s5QkUAb+KFgXF+yaM2ZroE0tgoBfa4fS4EYlsDWFgQBMPAzDw2B4j5e5ZcfB0S8N2ESsW4Tcb/3fGkI7No2/CdTB0/X7K1DUHhAoGABCrQ38AOlq0exHtbJgZougmqPx8mFddg4tUAu5DGgWUMXYDRNbohcUrOj7a4uRquz8eP//IQiKXN0BR9qhiXdLz77KRMR8GJgXP+G+EmMjoEcASiBZ0iPnB4/N+83PwQbQkFDCBuZ58aAx0eDPkfqTUKRmJBWyI6pRkTDCXtwF0=
