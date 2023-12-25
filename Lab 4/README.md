@@ -15,12 +15,14 @@
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/89.JPG"/></p>
 Итог запуска промета
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/10.JPG"/></p>
+
 ### *Grafana*
-добавляем графану в систему
+
+Добавляем графану в систему
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/11_12.JPG"/></p>
-устанавливаем её в кластер и сразу проверяем запущенные службы
+Устанавливаем её в кластер и сразу проверяем запущенные службы
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/13_14.JPG"/></p>
-запускаем сервис и сразу вычленяем сгенерированный пароль для учетки админа в графане
+Запускаем сервис и сразу вычленяем сгенерированный пароль для учетки админа в графане
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/15_16.JPG"/></p>
 Подключаемся к нашему кластеру 
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/18.JPG"/></p>
