@@ -49,7 +49,7 @@ kubectl create -f prometheus-ingress.yaml
 <p align="center"><img src="https://github.com/S-txt/2023_2024-cloud_systems_and_services-group-lepestok/blob/lab-4-dev/Lab%204/img/406.jpg"/></p>
 
 ### Запуск Alert Manager
-В качестве основы для конфигурации Alert Manager был взят tamplate из репозитория 
+В качестве основы для конфигурации Alert Manager был взят tamplate из репозитория https://github.com/bibinwilson/kubernetes-alert-manager
 - AlertManagerConfigmap.yaml
     Указвается информация о канале связи. 
     
