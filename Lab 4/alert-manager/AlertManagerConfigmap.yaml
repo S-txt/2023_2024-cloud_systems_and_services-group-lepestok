@@ -1,0 +1,36 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: lab4star
+data:
+  config.yml: |-
+    global:
+    templates:
+    - '/etc/alertmanager/*.tmpl'
+    route:
+      receiver: telegram
+      group_by: ['alertname', 'priority']
+      group_wait: 10s
+      repeat_interval: 30m
+      routes:
+        - receiver: telegram
+          match:
+            severity: 'warning'
+          group_wait: 10s
+          repeat_interval: 1m
+ 
+    receivers:
+    - name: telegram
+      telegram_configs:
+      - api_url: https://api.telegram.org
+        # set up your bot token
+        bot_token: 6697244359:AAHdHV4ZHBd6f7pC9DvaPhpsw4AZqaFcZqo
+        # to get your chat id you can use 
+        # https://t.me/RawDataBot and paste chat.id
+        chat_id: 708308191
+        disable_notifications: false
+        http_config:
+          follow_redirects: true
+        send_resolved: true
+        parse_mode: 'HTML'
